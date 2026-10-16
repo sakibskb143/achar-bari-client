@@ -1,0 +1,95 @@
+import { Menu, Search, UserRound } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import CartButton from './CartButton'
+import DesktopNavigation from './DesktopNavigation'
+import MobileNavigation from './MobileNavigation'
+
+function Navbar() {
+  const navigate = useNavigate()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const temporaryCartItemCount = 0
+
+  const handleSearchClick = () => {
+    navigate('/shop')
+  }
+
+  return (
+    <>
+      <header className="sticky top-0 z-40 border-b border-brand-secondary/15 bg-brand-background/95 backdrop-blur">
+        <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          <Link
+            to="/"
+            className="shrink-0"
+            aria-label="AcharBari home"
+          >
+            <p className="text-xl font-bold tracking-tight text-brand-primary sm:text-2xl">
+              AcharBari
+            </p>
+
+            <p className="font-bengali text-xs text-brand-secondary sm:text-sm">
+              ঘরের স্বাদ, এবার দ্বারে।
+            </p>
+          </Link>
+
+          <DesktopNavigation />
+
+          <div className="flex items-center gap-1 sm:gap-2">
+            <button
+              type="button"
+              onClick={handleSearchClick}
+              className="rounded-full p-2 text-brand-primary transition hover:bg-brand-primary/10"
+              aria-label="Search products"
+            >
+              <Search
+                size={21}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate('/login')}
+              className="hidden rounded-full p-2 text-brand-primary transition hover:bg-brand-primary/10 sm:block"
+              aria-label="Login or open profile"
+            >
+              <UserRound
+                size={21}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </button>
+
+            <CartButton
+              itemCount={temporaryCartItemCount}
+              onClick={() => navigate('/cart')}
+            />
+
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="rounded-full p-2 text-brand-primary transition hover:bg-brand-primary/10 lg:hidden"
+              aria-label="Open navigation menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <Menu
+                size={23}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <MobileNavigation
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
+    </>
+  )
+}
+
+export default Navbar
