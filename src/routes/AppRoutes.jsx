@@ -1,20 +1,22 @@
-import { Routes, Route } from 'react-router-dom'
-import MainLayout from '../layouts/MainLayout'
-import { Home } from '../pages/Home'
-import { Shop } from '../pages/Shop'
-import { ProductDetails } from '../pages/ProductDetails'
-import { TasteFinder } from '../pages/TasteFinder'
-import { BuildAcharBox } from '../pages/BuildAcharBox'
-import { Cart } from '../pages/Cart'
-import { Checkout } from '../pages/Checkout'
+import { Route, Routes } from 'react-router-dom'
+import { AdminDashboard } from '../pages/AdminDashboard'
 import {
   ForgotPassword,
   Login,
   Register,
 } from '../pages/Auth'
-import { UserDashboard } from '../pages/UserDashboard'
-import { AdminDashboard } from '../pages/AdminDashboard'
+import { BuildAcharBox } from '../pages/BuildAcharBox'
+import { Cart } from '../pages/Cart'
+import { Checkout } from '../pages/Checkout'
+import { Home } from '../pages/Home'
 import { NotFound } from '../pages/NotFound'
+import { ProductDetails } from '../pages/ProductDetails'
+import { Shop } from '../pages/Shop'
+import { TasteFinder } from '../pages/TasteFinder'
+import { UserDashboard } from '../pages/UserDashboard'
+import MainLayout from '../layouts/MainLayout'
+import AdminRoute from './AdminRoute'
+import PrivateRoute from './PrivateRoute'
 
 function AppRoutes() {
   return (
@@ -44,15 +46,19 @@ function AppRoutes() {
           element={<ForgotPassword />}
         />
 
-        <Route
-          path="/dashboard"
-          element={<UserDashboard />}
-        />
+        <Route element={<PrivateRoute />}>
+          <Route
+            path="/dashboard"
+            element={<UserDashboard />}
+          />
+        </Route>
 
-        <Route
-          path="/admin"
-          element={<AdminDashboard />}
-        />
+        <Route element={<AdminRoute />}>
+          <Route
+            path="/admin"
+            element={<AdminDashboard />}
+          />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Route>
