@@ -8,14 +8,20 @@ import {
   Badge,
   Button,
 } from '../common'
+import { useCart } from '../../context/CartContext'
+import { useWishlist } from '../../context/WishlistContext'
 import ProductRating from './ProductRating'
 import { formatPrice } from '../../utils/formatPrice'
 
-function ProductCard({
-  product,
-  onAddToCart,
-}) {
-  const [isWishlisted, setIsWishlisted] = useState(false)
+function ProductCard({ product }) {
+  const { addToCart } = useCart()
+  const {
+    isWishlisted,
+    toggleWishlist,
+  } = useWishlist()
+
+  const [notice, setNotice] = useState('')
+  const productIsWishlisted = isWishlisted(product.id)
   const isInStock = product.stock > 0
 
   const handleAddToCart = () => {
@@ -23,7 +29,13 @@ function ProductCard({
       return
     }
 
-    onAddToCart?.(product)
+    addToCart(product)
+
+    setNotice('Added')
+
+    window.setTimeout(() => {
+      setNotice('')
+    }, 1500)
   }
 
   return (
@@ -39,22 +51,22 @@ function ProductCard({
 
         <button
           type="button"
-          onClick={() => setIsWishlisted((current) => !current)}
+          onClick={() => toggleWishlist(product)}
           className={[
             'absolute right-4 top-4 rounded-full bg-white/90 p-2 shadow-sm transition',
-            isWishlisted
+            productIsWishlisted
               ? 'text-red-600'
               : 'text-brand-primary hover:bg-brand-primary hover:text-white',
           ].join(' ')}
           aria-label={
-            isWishlisted
+            productIsWishlisted
               ? `Remove ${product.name} from wishlist`
               : `Add ${product.name} to wishlist`
           }
         >
           <Heart
             size={19}
-            fill={isWishlisted ? 'currentColor' : 'none'}
+            fill={productIsWishlisted ? 'currentColor' : 'none'}
             aria-hidden="true"
           />
         </button>
@@ -107,18 +119,16 @@ function ProductCard({
             </p>
           </div>
 
-          <Button
-            size="sm"
-            disabled={!isInStock}
-            onClick={handleAddToCart}
-          >
-            <ShoppingBag
-              size={16}
-              aria-hidden="true"
-            />
-
-            {isInStock ? 'Add' : 'Unavailable'}
-          </Button>
+          <div className="text-right">
+            <Button
+              size="sm"
+              disabled={!isInStock}
+              onClick={handleAddToCart}
+            >
+              <ShoppingBag size={16} aria-hidden="true" />
+              {notice || (isInStock ? 'Add' : 'Unavailable')}
+            </Button>
+          </div>
         </div>
       </div>
     </article>

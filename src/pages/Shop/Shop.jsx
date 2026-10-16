@@ -12,7 +12,6 @@ import {
   ProductToolbar,
 } from '../../components/products'
 import { getProducts } from '../../services/productService'
-import { formatPrice } from '../../utils/formatPrice'
 
 const defaultFilters = {
   category: 'all',
@@ -34,7 +33,6 @@ function Shop() {
     category: initialCategory,
   })
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
-  const [notice, setNotice] = useState('')
 
   const allProducts = getProducts()
 
@@ -106,7 +104,10 @@ function Shop() {
 
         case 'featured':
         default:
-          return Number(secondProduct.featured) - Number(firstProduct.featured)
+          return (
+            Number(secondProduct.featured) -
+            Number(firstProduct.featured)
+          )
       }
     })
   }, [
@@ -115,14 +116,6 @@ function Shop() {
     searchTerm,
     sortBy,
   ])
-
-  const handleAddToCart = (product) => {
-    setNotice(`${product.name} is ready to be added to your cart.`)
-
-    window.setTimeout(() => {
-      setNotice('')
-    }, 2500)
-  }
 
   const resetFilters = () => {
     setFilters(defaultFilters)
@@ -145,10 +138,7 @@ function Shop() {
             variant="outline"
             onClick={() => setIsFilterModalOpen(true)}
           >
-            <SlidersHorizontal
-              size={18}
-              aria-hidden="true"
-            />
+            <SlidersHorizontal size={18} aria-hidden="true" />
             Open Filters
           </Button>
         </div>
@@ -171,20 +161,8 @@ function Shop() {
               resultCount={filteredProducts.length}
             />
 
-            {notice && (
-              <div
-                className="mt-4 rounded-xl border border-brand-accent/50 bg-brand-accent/20 px-4 py-3 text-sm font-medium text-brand-text"
-                role="status"
-              >
-                {notice}
-              </div>
-            )}
-
             <div className="mt-6">
-              <ProductGrid
-                products={filteredProducts}
-                onAddToCart={handleAddToCart}
-              />
+              <ProductGrid products={filteredProducts} />
             </div>
           </div>
         </div>

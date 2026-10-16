@@ -1,10 +1,7 @@
 import { EmptyState } from '../common'
 import ProductCard from './ProductCard'
 
-function ProductGrid({
-  products,
-  onAddToCart,
-}) {
+function ProductGrid({ products }) {
   if (products.length === 0) {
     return (
       <EmptyState
@@ -20,7 +17,6 @@ function ProductGrid({
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCart={onAddToCart}
         />
       ))}
     </div>

@@ -1,9 +1,6 @@
 import ProductCard from './ProductCard'
 
-function RelatedProducts({
-  products,
-  onAddToCart,
-}) {
+function RelatedProducts({ products }) {
   if (products.length === 0) {
     return null
   }
@@ -19,7 +16,6 @@ function RelatedProducts({
           <ProductCard
             key={product.id}
             product={product}
-            onAddToCart={onAddToCart}
           />
         ))}
       </div>

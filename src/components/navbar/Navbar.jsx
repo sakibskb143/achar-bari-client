@@ -1,19 +1,15 @@
 import { Menu, Search, UserRound } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useCart } from '../../context/CartContext'
 import CartButton from './CartButton'
 import DesktopNavigation from './DesktopNavigation'
 import MobileNavigation from './MobileNavigation'
 
-function Navbar() {
+function Navbar({ onOpenCart }) {
   const navigate = useNavigate()
+  const { cartItemCount } = useCart()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  const temporaryCartItemCount = 0
-
-  const handleSearchClick = () => {
-    navigate('/shop')
-  }
 
   return (
     <>
@@ -38,15 +34,11 @@ function Navbar() {
           <div className="flex items-center gap-1 sm:gap-2">
             <button
               type="button"
-              onClick={handleSearchClick}
+              onClick={() => navigate('/shop')}
               className="rounded-full p-2 text-brand-primary transition hover:bg-brand-primary/10"
               aria-label="Search products"
             >
-              <Search
-                size={21}
-                strokeWidth={1.8}
-                aria-hidden="true"
-              />
+              <Search size={21} aria-hidden="true" />
             </button>
 
             <button
@@ -55,16 +47,12 @@ function Navbar() {
               className="hidden rounded-full p-2 text-brand-primary transition hover:bg-brand-primary/10 sm:block"
               aria-label="Login or open profile"
             >
-              <UserRound
-                size={21}
-                strokeWidth={1.8}
-                aria-hidden="true"
-              />
+              <UserRound size={21} aria-hidden="true" />
             </button>
 
             <CartButton
-              itemCount={temporaryCartItemCount}
-              onClick={() => navigate('/cart')}
+              itemCount={cartItemCount}
+              onClick={onOpenCart}
             />
 
             <button
@@ -74,11 +62,7 @@ function Navbar() {
               aria-label="Open navigation menu"
               aria-expanded={isMobileMenuOpen}
             >
-              <Menu
-                size={23}
-                strokeWidth={1.8}
-                aria-hidden="true"
-              />
+              <Menu size={23} aria-hidden="true" />
             </button>
           </div>
         </div>

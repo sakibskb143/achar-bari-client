@@ -1,10 +1,16 @@
 import { BrowserRouter } from 'react-router-dom'
+import { CartProvider } from './context/CartContext'
+import { WishlistProvider } from './context/WishlistContext'
 import { AppRoutes } from './routes'
 
 function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <CartProvider>
+        <WishlistProvider>
+          <AppRoutes />
+        </WishlistProvider>
+      </CartProvider>
     </BrowserRouter>
   )
 }

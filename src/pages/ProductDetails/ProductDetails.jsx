@@ -4,35 +4,38 @@ import {
   Phone,
   ShoppingBag,
   Star,
-} from 'lucide-react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useState } from 'react'
+} from "lucide-react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import {
   Badge,
   Button,
   ErrorMessage,
   QuantitySelector,
   SectionHeading,
-} from '../../components/common'
+} from "../../components/common";
 import {
   ProductGallery,
   ProductRating,
   ProductReviews,
   RelatedProducts,
-} from '../../components/products'
+} from "../../components/products";
+import { useCart } from "../../context/CartContext";
 import {
   getProductById,
   getRelatedProducts,
-} from '../../services/productService'
-import { formatPrice } from '../../utils/formatPrice'
+} from "../../services/productService";
+import { formatPrice } from "../../utils/formatPrice";
 
 function ProductDetails() {
-  const { productId } = useParams()
-  const navigate = useNavigate()
-  const [quantity, setQuantity] = useState(1)
-  const [notice, setNotice] = useState('')
+  const { productId } = useParams();
+  const { addToCart } = useCart()
 
-  const product = getProductById(productId)
+  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
+  const [notice, setNotice] = useState("");
+
+  const product = getProductById(productId);
 
   if (!product) {
     return (
@@ -43,10 +46,7 @@ function ProductDetails() {
             message="The product you are looking for does not exist."
           />
 
-          <Link
-            to="/shop"
-            className="mt-6 inline-block"
-          >
+          <Link to="/shop" className="mt-6 inline-block">
             <Button variant="outline">
               <ArrowLeft size={18} aria-hidden="true" />
               Back to Shop
@@ -54,41 +54,38 @@ function ProductDetails() {
           </Link>
         </div>
       </section>
-    )
+    );
   }
 
-  const isInStock = product.stock > 0
-  const relatedProducts = getRelatedProducts(
-    product.id,
-    product.category,
-  )
+  const isInStock = product.stock > 0;
+  const relatedProducts = getRelatedProducts(product.id, product.category);
 
   const handleAddToCart = () => {
     if (!isInStock) {
-      return
+      return;
     }
 
     setNotice(
       `${quantity} × ${product.name} is ready to be added to your cart.`,
-    )
-  }
+    );
+  };
 
   const handleBuyNow = () => {
     if (!isInStock) {
-      return
+      return;
     }
 
-    navigate('/checkout', {
+    navigate("/checkout", {
       state: {
         productId: product.id,
         quantity,
       },
-    })
-  }
+    });
+  };
 
   const whatsappMessage = encodeURIComponent(
     `Hello, I would like to order ${product.name} (${product.weight}).`,
-  )
+  );
 
   return (
     <section className="px-4 py-12 sm:px-6 lg:px-8">
@@ -106,17 +103,13 @@ function ProductDetails() {
 
           <div>
             <div className="flex flex-wrap gap-2">
-              <Badge variant={isInStock ? 'success' : 'danger'}>
-                {isInStock ? 'In Stock' : 'Out of Stock'}
+              <Badge variant={isInStock ? "success" : "danger"}>
+                {isInStock ? "In Stock" : "Out of Stock"}
               </Badge>
 
-              <Badge variant="accent">
-                {product.spiceLevel} Spice
-              </Badge>
+              <Badge variant="accent">{product.spiceLevel} Spice</Badge>
 
-              <Badge variant="secondary">
-                {product.taste}
-              </Badge>
+              <Badge variant="secondary">{product.taste}</Badge>
             </div>
 
             <p className="mt-5 font-bengali text-base text-brand-secondary">
@@ -172,10 +165,7 @@ function ProductDetails() {
                 disabled={!isInStock}
               />
 
-              <Button
-                disabled={!isInStock}
-                onClick={handleAddToCart}
-              >
+              <Button disabled={!isInStock} onClick={handleAddToCart}>
                 <ShoppingBag size={18} aria-hidden="true" />
                 Add to Cart
               </Button>
@@ -268,11 +258,7 @@ function ProductDetails() {
               </h2>
 
               <div className="flex items-center gap-1 text-brand-accent">
-                <Star
-                  size={18}
-                  fill="currentColor"
-                  aria-hidden="true"
-                />
+                <Star size={18} fill="currentColor" aria-hidden="true" />
 
                 <span className="font-semibold text-brand-text">
                   {product.rating}
@@ -284,17 +270,19 @@ function ProductDetails() {
           </div>
         </div>
 
-        <RelatedProducts
+        {/* <RelatedProducts
           products={relatedProducts}
-          onAddToCart={(relatedProduct ) =>
+          onAddToCart={(relatedProduct) =>
             setNotice(
               `${relatedProduct.name} is ready to be added to your cart.`,
             )
           }
-        />
+        /> */}
+        <RelatedProducts products={relatedProducts} />
+
       </div>
     </section>
-  )
+  );
 }
 
-export default ProductDetails
+export default ProductDetails;
