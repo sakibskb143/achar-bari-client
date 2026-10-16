@@ -1,14 +1,24 @@
-import { RoutePlaceholder } from '../../components/common'
+import HeroSection from './HeroSection'
+import CategorySection from './CategorySection'
+import PopularProductsSection from './PopularProductsSection'
+import TasteFinderPromo from './TasteFinderPromo'
+import BuildBoxPromo from './BuildBoxPromo'
+import WhyChooseUs from './WhyChooseUs'
+import CustomerReviews from './CustomerReviews'
+import NewsletterSection from './NewsletterSection'
 
 function Home() {
   return (
-    <RoutePlaceholder
-      eyebrow="AcharBari"
-      title="ঘরের স্বাদ, এবার দ্বারে।"
-      description="The AcharBari homepage will be built in Phase 4 with the hero carousel, categories, popular products, testimonials, and promotional sections."
-      actionLabel="Explore Shop"
-      actionPath="/shop"
-    />
+    <>
+      <HeroSection />
+      <CategorySection />
+      <PopularProductsSection />
+      <TasteFinderPromo />
+      <BuildBoxPromo />
+      <WhyChooseUs />
+      <CustomerReviews />
+      <NewsletterSection />
+    </>
   )
 }
 
