@@ -1,7 +1,7 @@
-import { Heart, ShoppingBag, Star } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { popularProducts } from '../../data/homeData'
-import { Badge, Button, SectionHeading } from '../../components/common'
+import { Heart, ShoppingBag, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+import { popularProducts } from "../../data/homeData";
+import { Badge, Button, SectionHeading } from "../../components/common";
 
 function PopularProductsSection() {
   return (
@@ -31,10 +31,7 @@ function PopularProductsSection() {
                   className="absolute right-4 top-4 rounded-full bg-white/90 p-2 text-brand-primary shadow-sm transition hover:bg-brand-primary hover:text-white"
                   aria-label={`Add ${product.name} to wishlist`}
                 >
-                  <Heart
-                    size={19}
-                    aria-hidden="true"
-                  />
+                  <Heart size={19} aria-hidden="true" />
                 </button>
 
                 <Badge className="absolute bottom-4 left-4">
@@ -53,11 +50,7 @@ function PopularProductsSection() {
 
                 <div className="mt-3 flex items-center gap-2">
                   <div className="flex items-center gap-1 text-brand-accent">
-                    <Star
-                      size={16}
-                      fill="currentColor"
-                      aria-hidden="true"
-                    />
+                    <Star size={16} fill="currentColor" aria-hidden="true" />
 
                     <span className="text-sm font-semibold text-brand-text">
                       {product.rating}
@@ -75,17 +68,12 @@ function PopularProductsSection() {
                       ৳{product.price}
                     </p>
 
-                    <p className="text-xs text-brand-muted">
-                      {product.weight}
-                    </p>
+                    <p className="text-xs text-brand-muted">{product.weight}</p>
                   </div>
 
-                  <Link to={`/shop/${product.id}`}>
+                  <Link to={`/products/${product.id}`}>
                     <Button size="sm">
-                      <ShoppingBag
-                        size={16}
-                        aria-hidden="true"
-                      />
+                      <ShoppingBag size={16} aria-hidden="true" />
                       View
                     </Button>
                   </Link>
@@ -97,14 +85,12 @@ function PopularProductsSection() {
 
         <div className="mt-10 text-center">
           <Link to="/shop">
-            <Button variant="outline">
-              View All Pickles
-            </Button>
+            <Button variant="outline">View All Pickles</Button>
           </Link>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default PopularProductsSection
+export default PopularProductsSection;
