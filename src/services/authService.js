@@ -8,66 +8,78 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-} from 'firebase/auth'
-import { auth } from '../config/firebase.init'
+  onAuthStateChanged,
+} from "firebase/auth";
 
-const googleProvider = new GoogleAuthProvider()
+import { auth } from "../config/firebase.init";
 
-export async function registerWithEmail(
-  name,
-  email,
-  password,
-) {
-  await setPersistence(auth, browserLocalPersistence)
+const googleProvider = new GoogleAuthProvider();
 
-  const userCredential =
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    )
+// Register with email and password
+export async function registerWithEmail(name, email, password) {
+  await setPersistence(auth, browserLocalPersistence);
+
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
 
   if (name.trim()) {
     await updateProfile(userCredential.user, {
       displayName: name.trim(),
-    })
+    });
   }
 
-  return userCredential.user
+  return userCredential.user;
 }
 
+// Login with email and password
 export async function loginWithEmail(email, password) {
-  await setPersistence(auth, browserLocalPersistence)
+  await setPersistence(auth, browserLocalPersistence);
 
-  const userCredential =
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    )
-
-  return userCredential.user
-}
-
-export async function loginWithGoogle() {
-  await setPersistence(auth, browserLocalPersistence)
-
-  const userCredential = await signInWithPopup(
+  const userCredential = await signInWithEmailAndPassword(
     auth,
-    googleProvider,
-  )
+    email,
+    password
+  );
 
-  return userCredential.user
+  return userCredential.user;
 }
 
+// Login with Google
+export async function loginWithGoogle() {
+  await setPersistence(auth, browserLocalPersistence);
+
+  const userCredential = await signInWithPopup(auth, googleProvider);
+
+  return userCredential.user;
+}
+
+// Send password reset email
 export async function sendPasswordReset(email) {
-  return sendPasswordResetEmail(auth, email)
+  return sendPasswordResetEmail(auth, email);
 }
 
+// Logout
 export async function logoutUser() {
-  return signOut(auth)
+  return signOut(auth);
 }
 
+// Listen for authentication changes
 export function subscribeToAuthChanges(callback) {
-  return auth.onAuthStateChanged(callback)
+  return onAuthStateChanged(auth, callback);
+}
+
+// Update the current user's display name
+export async function updateUserDisplayName(name) {
+  if (!auth.currentUser) {
+    throw new Error("No authenticated user found.");
+  }
+
+  await updateProfile(auth.currentUser, {
+    displayName: name.trim(),
+  });
+
+  return auth.currentUser;
 }

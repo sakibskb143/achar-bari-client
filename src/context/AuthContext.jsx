@@ -1,9 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { createContext, useContext, useEffect, useState } from "react";
+
 import {
   loginWithEmail,
   loginWithGoogle,
@@ -11,22 +7,31 @@ import {
   registerWithEmail,
   sendPasswordReset,
   subscribeToAuthChanges,
-} from '../services/authService'
+  updateUserDisplayName,
+} from "../services/authService";
 
-const AuthContext = createContext(null)
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null)
-  const [authLoading, setAuthLoading] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthChanges((user) => {
-      setCurrentUser(user)
-      setAuthLoading(false)
-    })
+      setCurrentUser(user);
+      setAuthLoading(false);
+    });
 
-    return unsubscribe
-  }, [])
+    return unsubscribe;
+  }, []);
+
+  const updateUserProfile = async (name) => {
+    const updatedUser = await updateUserDisplayName(name);
+
+    setCurrentUser(updatedUser);
+
+    return updatedUser;
+  };
 
   const value = {
     currentUser,
@@ -37,23 +42,22 @@ export function AuthProvider({ children }) {
     loginWithGoogle,
     sendPasswordReset,
     logoutUser,
-  }
+    updateUserProfile,
+  };
 
   return (
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error(
-      'useAuth must be used inside an AuthProvider',
-    )
+    throw new Error("useAuth must be used inside an AuthProvider");
   }
 
-  return context
+  return context;
 }

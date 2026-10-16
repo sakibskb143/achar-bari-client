@@ -1,1 +1,6 @@
-export { default as UserDashboard } from './UserDashboard'
+export { default as DashboardOverview } from './DashboardOverview'
+export { default as EditProfile } from './EditProfile'
+export { default as Orders } from './Orders'
+export { default as OrderDetails } from './OrderDetails'
+export { default as Wishlist } from './Wishlist'
+export { default as SavedAddresses } from './SavedAddresses'

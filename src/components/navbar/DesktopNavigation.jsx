@@ -15,13 +15,23 @@ const navigationLinks = [
   },
 ]
 
-function DesktopNavigation() {
+function DesktopNavigation({ currentUser }) {
+  const visibleLinks = currentUser
+    ? [
+        ...navigationLinks,
+        {
+          label: 'Dashboard',
+          path: '/dashboard',
+        },
+      ]
+    : navigationLinks
+
   return (
     <nav
-      className="hidden items-center gap-6 lg:flex"
+      className="hidden items-center gap-5 lg:flex"
       aria-label="Main navigation"
     >
-      {navigationLinks.map((link) => (
+      {visibleLinks.map((link) => (
         <NavLink
           key={link.path}
           to={link.path}

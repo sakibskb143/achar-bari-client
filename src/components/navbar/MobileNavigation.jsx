@@ -1,33 +1,48 @@
-import { X } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { X } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 
 const navigationLinks = [
   {
-    label: "Home",
-    path: "/",
+    label: 'Home',
+    path: '/',
   },
   {
-    label: "Shop",
-    path: "/shop",
+    label: 'Shop',
+    path: '/shop',
   },
   {
-    label: "Taste Finder",
-    path: "/taste-finder",
+    label: 'Taste Finder',
+    path: '/taste-finder',
   },
   {
-    label: "Build Your Own Achar Box",
-    path: "/build-achar-box",
+    label: 'Build Your Own Achar Box',
+    path: '/build-achar-box',
   },
   {
-    label: "Cart",
-    path: "/cart",
+    label: 'Cart',
+    path: '/cart',
   },
-];
+]
 
-function MobileNavigation({ isOpen, onClose, currentUser, onLogout }) {
+function MobileNavigation({
+  isOpen,
+  onClose,
+  currentUser,
+  onLogout,
+}) {
   if (!isOpen) {
-    return null;
+    return null
   }
+
+  const visibleLinks = currentUser
+    ? [
+        ...navigationLinks,
+        {
+          label: 'Dashboard',
+          path: '/dashboard',
+        },
+      ]
+    : navigationLinks
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
@@ -41,7 +56,9 @@ function MobileNavigation({ isOpen, onClose, currentUser, onLogout }) {
       <aside className="relative ml-auto flex h-full w-[min(88%,380px)] flex-col bg-brand-surface p-6 shadow-2xl">
         <div className="flex items-center justify-between border-b border-brand-secondary/15 pb-5">
           <div>
-            <p className="font-bold text-brand-primary">AcharBari</p>
+            <p className="font-bold text-brand-primary">
+              AcharBari
+            </p>
 
             <p className="font-bengali text-sm text-brand-secondary">
               ঘরের স্বাদ, এবার দ্বারে।
@@ -62,18 +79,19 @@ function MobileNavigation({ isOpen, onClose, currentUser, onLogout }) {
           className="mt-6 flex flex-col gap-2"
           aria-label="Mobile navigation"
         >
-          {navigationLinks.map((link) => (
+          {visibleLinks.map((link) => (
             <NavLink
               key={link.path}
               to={link.path}
+              end={link.path === '/'}
               onClick={onClose}
               className={({ isActive }) =>
                 [
-                  "rounded-xl px-4 py-3 text-sm font-semibold transition",
+                  'rounded-xl px-4 py-3 text-sm font-semibold transition',
                   isActive
-                    ? "bg-brand-primary text-white"
-                    : "text-brand-text hover:bg-brand-primary/10 hover:text-brand-primary",
-                ].join(" ")
+                    ? 'bg-brand-primary text-white'
+                    : 'text-brand-text hover:bg-brand-primary/10 hover:text-brand-primary',
+                ].join(' ')
               }
             >
               {link.label}
@@ -102,7 +120,7 @@ function MobileNavigation({ isOpen, onClose, currentUser, onLogout }) {
         </div>
       </aside>
     </div>
-  );
+  )
 }
 
-export default MobileNavigation;
+export default MobileNavigation

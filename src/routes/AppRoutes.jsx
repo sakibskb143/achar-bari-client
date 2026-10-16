@@ -9,11 +9,20 @@ import { NotFound } from "../pages/NotFound";
 import { ProductDetails } from "../pages/ProductDetails";
 import { Shop } from "../pages/Shop";
 import { TasteFinder } from "../pages/TasteFinder";
-import { UserDashboard } from "../pages/UserDashboard";
+//import { UserDashboard } from "../pages/UserDashboard";
 import MainLayout from "../layouts/MainLayout";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import { OrderConfirmation } from "../pages/OrderConfirmation";
+import DashboardLayout from "../layouts/DashboardLayout";
+import {
+  DashboardOverview,
+  EditProfile,
+  OrderDetails,
+  Orders,
+  SavedAddresses,
+  Wishlist,
+} from "../pages/UserDashboard";
 
 function AppRoutes() {
   return (
@@ -36,7 +45,22 @@ function AppRoutes() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<UserDashboard />} />
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<DashboardOverview />} />
+
+            <Route path="/dashboard/profile" element={<EditProfile />} />
+
+            <Route path="/dashboard/orders" element={<Orders />} />
+
+            <Route
+              path="/dashboard/orders/:orderId"
+              element={<OrderDetails />}
+            />
+
+            <Route path="/dashboard/wishlist" element={<Wishlist />} />
+
+            <Route path="/dashboard/addresses" element={<SavedAddresses />} />
+          </Route>
         </Route>
 
         <Route element={<AdminRoute />}>
