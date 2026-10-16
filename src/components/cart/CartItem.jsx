@@ -1,24 +1,17 @@
-import { Trash2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { useCart } from '../../context/CartContext'
-import { QuantitySelector } from '../common'
-import { formatPrice } from '../../utils/formatPrice'
+import { Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
+import { QuantitySelector } from "../common";
+import { formatPrice } from "../../utils/formatPrice";
 
 function CartItem({ item }) {
-  const {
-    increaseQuantity,
-    decreaseQuantity,
-    removeFromCart,
-  } = useCart()
+  const { increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
 
-  const { product, quantity } = item
+  const { product, quantity } = item;
 
   return (
     <article className="flex gap-4 border-b border-brand-secondary/15 py-5 last:border-b-0">
-      <Link
-        to={`/products/${product.id}`}
-        className="shrink-0"
-      >
+      <Link to={`/products/${product.id}`} className="shrink-0">
         <img
           src={product.image}
           alt={product.name}
@@ -37,8 +30,18 @@ function CartItem({ item }) {
             </Link>
 
             <p className="mt-1 text-sm text-brand-muted">
-              {product.weight}
+              {product.isCustomBox
+                ? `${product.boxSize} selected pickle items`
+                : product.weight}
             </p>
+
+            {product.isCustomBox && (
+              <p className="mt-2 text-xs text-brand-secondary">
+                {product.selectedProducts
+                  .map((selectedProduct) => selectedProduct.name)
+                  .join(", ")}
+              </p>
+            )}
           </div>
 
           <button
@@ -69,7 +72,7 @@ function CartItem({ item }) {
         </div>
       </div>
     </article>
-  )
+  );
 }
 
-export default CartItem
+export default CartItem;
