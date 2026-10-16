@@ -1,94 +1,153 @@
+import { useState } from 'react'
 import {
-  ButtonLoader,
-  InlineLoader,
-  LoadingOverlay,
-  PageLoader,
-  ProductSkeleton,
-} from './components/loader'
+  Badge,
+  Button,
+  EmptyState,
+  ErrorMessage,
+  Modal,
+  QuantitySelector,
+  SectionHeading,
+} from './components/common'
 
 function App() {
+  const [quantity, setQuantity] = useState(1)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <main className="min-h-screen bg-brand-background px-6 py-12 text-brand-text">
-      <section className="mx-auto max-w-6xl">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.25em] text-brand-secondary">
-            AcharBari
-          </p>
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="AcharBari UI"
+          title="Shared Components"
+          description="Reusable interface components for the AcharBari shopping experience."
+        />
 
-          <h1 className="text-4xl font-bold text-brand-primary">
-            Loader Components
-          </h1>
-
-          <p className="mt-3 text-brand-muted">
-            Phase 2A component test page
-          </p>
-        </div>
-
-        <div className="space-y-10">
+        <div className="grid gap-6 md:grid-cols-2">
           <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
             <h2 className="mb-4 text-xl font-semibold text-brand-primary">
-              Page Loader
+              Buttons
             </h2>
 
-            <PageLoader label="Loading AcharBari" />
-          </section>
+            <div className="flex flex-wrap gap-3">
+              <Button>
+                Primary
+              </Button>
 
-          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
-            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
-              Button Loader
-            </h2>
+              <Button variant="secondary">
+                Secondary
+              </Button>
 
-            <button
-              type="button"
-              disabled
-              className="btn bg-brand-primary text-white"
-            >
-              <ButtonLoader label="Saving" />
-            </button>
-          </section>
+              <Button variant="accent">
+                Accent
+              </Button>
 
-          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
-            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
-              Inline Loader
-            </h2>
+              <Button variant="outline">
+                Outline
+              </Button>
 
-            <InlineLoader label="Loading products" />
-          </section>
+              <Button variant="danger">
+                Delete
+              </Button>
 
-          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
-            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
-              Product Skeletons
-            </h2>
-
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {Array.from({ length: 4 }).map((_, index) => (
-                <ProductSkeleton key={index} />
-              ))}
+              <Button loading>
+                Save
+              </Button>
             </div>
           </section>
 
           <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
             <h2 className="mb-4 text-xl font-semibold text-brand-primary">
-              Loading Overlay
+              Badges
             </h2>
 
-            <LoadingOverlay
-              isLoading
-              label="Loading account information"
-            >
-              <div className="rounded-xl border border-brand-secondary/20 p-8">
-                <h3 className="text-lg font-semibold">
-                  Customer account
-                </h3>
+            <div className="flex flex-wrap gap-3">
+              <Badge variant="primary">
+                Mango Pickle
+              </Badge>
 
-                <p className="mt-2 text-brand-muted">
-                  Account content remains visible under the overlay.
-                </p>
-              </div>
-            </LoadingOverlay>
+              <Badge variant="success">
+                In Stock
+              </Badge>
+
+              <Badge variant="warning">
+                Low Stock
+              </Badge>
+
+              <Badge variant="danger">
+                Out of Stock
+              </Badge>
+            </div>
+          </section>
+
+          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
+              Quantity Selector
+            </h2>
+
+            <QuantitySelector
+              value={quantity}
+              onChange={setQuantity}
+              min={1}
+              max={5}
+            />
+
+            <p className="mt-3 text-sm text-brand-muted">
+              Selected quantity: {quantity}
+            </p>
+          </section>
+
+          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
+              Error Message
+            </h2>
+
+            <ErrorMessage
+              message="This is an example error message."
+            />
+          </section>
+
+          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
+              Modal
+            </h2>
+
+            <Button onClick={() => setIsModalOpen(true)}>
+              Open Modal
+            </Button>
+
+            <Modal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              title="AcharBari Modal"
+            >
+              <p className="leading-7 text-brand-muted">
+                This modal can be reused for confirmations, product previews,
+                login prompts, and other dialogs.
+              </p>
+
+              <Button
+                className="mt-5"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Close Modal
+              </Button>
+            </Modal>
+          </section>
+
+          <section className="rounded-2xl bg-brand-surface p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-semibold text-brand-primary">
+              Empty State
+            </h2>
+
+            <EmptyState
+              title="No products found"
+              description="Try changing your filters or search for another pickle."
+              actionLabel="Reset Filters"
+              onAction={() => alert('Filters reset')}
+            />
           </section>
         </div>
-      </section>
+      </div>
     </main>
   )
 }
