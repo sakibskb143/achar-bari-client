@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap' );
+
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+@theme {
+  --color-brand-primary: #53182f;
+  --color-brand-secondary: #a47760;
+  --color-brand-accent: #e3b341;
+  --color-brand-background: #fff9f1;
+  --color-brand-surface: #ffffff;
+  --color-brand-text: #302521;
+  --color-brand-muted: #776963;
+}
+
+:root {
+  font-family: 'Open Sans', sans-serif;
+  color: #302521;
+  background-color: #fff9f1;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #fff9f1;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.font-bengali {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+::selection {
+  color: #ffffff;
+  background-color: #53182f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
