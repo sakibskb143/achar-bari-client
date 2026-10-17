@@ -1,1 +1,7 @@
-export { default as AdminDashboard } from './AdminDashboard'
+export { default as AdminOverview } from './AdminOverview'
+export { default as ProductManagement } from './ProductManagement'
+export { default as CategoryManagement } from './CategoryManagement'
+export { default as OrderManagement } from './OrderManagement'
+export { default as UserManagement } from './UserManagement'
+export { default as ReviewManagement } from './ReviewManagement'
+export { default as CouponManagement } from './CouponManagement'

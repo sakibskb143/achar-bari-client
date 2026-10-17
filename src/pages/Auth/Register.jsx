@@ -1,4 +1,4 @@
-import { Globe } from 'lucide-react'
+import { Globe } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, ErrorMessage } from "../../components/common";
@@ -50,7 +50,11 @@ function Register() {
     try {
       await registerWithEmail(formData.name, formData.email, formData.password);
 
-      navigate("/dashboard", { replace: true });
+      navigate("/dashboard", {
+        replace: true,
+      });
+
+      //navigate("/dashboard", { replace: true });
     } catch (authError) {
       setError(getFirebaseErrorMessage(authError));
     } finally {
@@ -64,7 +68,10 @@ function Register() {
 
     try {
       await loginWithGoogle();
-      navigate("/dashboard", { replace: true });
+
+      navigate("/dashboard", {
+        replace: true,
+      });
     } catch (authError) {
       setError(getFirebaseErrorMessage(authError));
     } finally {

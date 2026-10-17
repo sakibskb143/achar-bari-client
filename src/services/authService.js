@@ -2,84 +2,97 @@ import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
-  onAuthStateChanged,
-} from "firebase/auth";
+} from 'firebase/auth'
+import { auth } from '../config/firebase'
 
-import { auth } from "../config/firebase.init";
+const googleProvider = new GoogleAuthProvider()
 
-const googleProvider = new GoogleAuthProvider();
-
-// Register with email and password
-export async function registerWithEmail(name, email, password) {
-  await setPersistence(auth, browserLocalPersistence);
-
-  const userCredential = await createUserWithEmailAndPassword(
+export async function registerWithEmail(
+  name,
+  email,
+  password,
+) {
+  await setPersistence(
     auth,
-    email,
-    password
-  );
+    browserLocalPersistence,
+  )
+
+  const userCredential =
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    )
 
   if (name.trim()) {
     await updateProfile(userCredential.user, {
       displayName: name.trim(),
-    });
+    })
   }
 
-  return userCredential.user;
+  return userCredential.user
 }
 
-// Login with email and password
-export async function loginWithEmail(email, password) {
-  await setPersistence(auth, browserLocalPersistence);
-
-  const userCredential = await signInWithEmailAndPassword(
+export async function loginWithEmail(
+  email,
+  password,
+) {
+  await setPersistence(
     auth,
-    email,
-    password
-  );
+    browserLocalPersistence,
+  )
 
-  return userCredential.user;
+  const userCredential =
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    )
+
+  return userCredential.user
 }
 
-// Login with Google
 export async function loginWithGoogle() {
-  await setPersistence(auth, browserLocalPersistence);
+  await setPersistence(
+    auth,
+    browserLocalPersistence,
+  )
 
-  const userCredential = await signInWithPopup(auth, googleProvider);
+  const userCredential = await signInWithPopup(
+    auth,
+    googleProvider,
+  )
 
-  return userCredential.user;
+  return userCredential.user
 }
 
-// Send password reset email
 export async function sendPasswordReset(email) {
-  return sendPasswordResetEmail(auth, email);
+  return sendPasswordResetEmail(auth, email)
 }
 
-// Logout
 export async function logoutUser() {
-  return signOut(auth);
+  return signOut(auth)
 }
 
-// Listen for authentication changes
 export function subscribeToAuthChanges(callback) {
-  return onAuthStateChanged(auth, callback);
+  return onAuthStateChanged(auth, callback)
 }
 
-// Update the current user's display name
 export async function updateUserDisplayName(name) {
   if (!auth.currentUser) {
-    throw new Error("No authenticated user found.");
+    throw new Error('No authenticated user found.')
   }
 
   await updateProfile(auth.currentUser, {
-    displayName: name.trim(),
-  });
+    displayName: name,
+  })
 
-  return auth.currentUser;
+  return auth.currentUser
 }

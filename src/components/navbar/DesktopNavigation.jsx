@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
+import { USER_ROLES } from '../../utils/userRole'
 
 const navigationLinks = [
   {
@@ -15,16 +17,24 @@ const navigationLinks = [
   },
 ]
 
-function DesktopNavigation({ currentUser }) {
-  const visibleLinks = currentUser
-    ? [
-        ...navigationLinks,
-        {
-          label: 'Dashboard',
-          path: '/dashboard',
-        },
-      ]
-    : navigationLinks
+function DesktopNavigation() {
+  const { currentUser, userRole } = useAuth()
+
+  const visibleLinks = [...navigationLinks]
+
+  if (currentUser && userRole === USER_ROLES.USER) {
+    visibleLinks.push({
+      label: 'Dashboard',
+      path: '/dashboard',
+    })
+  }
+
+  if (currentUser && userRole === USER_ROLES.ADMIN) {
+    visibleLinks.push({
+      label: 'Admin Panel',
+      path: '/admin',
+    })
+  }
 
   return (
     <nav

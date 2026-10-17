@@ -6,7 +6,7 @@ export const heroSlides = [
     description:
       'Authentic Bengali pickle flavors made with care and delivered fresh to your doorstep.',
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1400&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     imageAlt: 'Traditional homemade food served on a table',
   },
   {
@@ -16,7 +16,7 @@ export const heroSlides = [
     description:
       'Discover flavorful pickles inspired by family recipes and Bengali food traditions.',
     image:
-      'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1400&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     imageAlt: 'Colorful homemade food ingredients',
   },
   {
@@ -26,7 +26,7 @@ export const heroSlides = [
     description:
       'Tell us what you love and discover your perfect balance of sweet, sour, salty, and spicy.',
     image:
-      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1400&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     imageAlt: 'Fresh spices and food ingredients',
   },
 ]
@@ -38,7 +38,7 @@ export const categories = [
     bengaliName: 'আমের আচার',
     description: 'Tangy and flavorful seasonal favorites.',
     image:
-      'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=700&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
   {
     id: 'chili',
@@ -46,7 +46,7 @@ export const categories = [
     bengaliName: 'মরিচের আচার',
     description: 'Bold heat for spice lovers.',
     image:
-      'https://images.unsplash.com/photo-1583663848850-46af132dc08d?auto=format&fit=crop&w=700&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
   {
     id: 'mixed',
@@ -54,7 +54,7 @@ export const categories = [
     bengaliName: 'মিক্সড আচার',
     description: 'A delicious blend of seasonal ingredients.',
     image:
-      'https://images.unsplash.com/photo-1599909533730-f9d9b7f7f8e2?auto=format&fit=crop&w=700&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
   {
     id: 'sweet',
@@ -62,7 +62,7 @@ export const categories = [
     bengaliName: 'মিষ্টি আচার',
     description: 'Perfectly balanced sweet and sour flavors.',
     image:
-      'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=700&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
 ]
 
@@ -77,7 +77,7 @@ export const popularProducts = [
     reviews: 48,
     spiceLevel: 'Medium',
     image:
-      'https://images.unsplash.com/photo-1599909533730-f9d9b7f7f8e2?auto=format&fit=crop&w=800&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
   {
     id: 'chili-pickle-300',
@@ -89,7 +89,7 @@ export const popularProducts = [
     reviews: 36,
     spiceLevel: 'Hot',
     image:
-      'https://images.unsplash.com/photo-1583663848850-46af132dc08d?auto=format&fit=crop&w=800&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
   {
     id: 'mixed-pickle-500',
@@ -101,7 +101,7 @@ export const popularProducts = [
     reviews: 29,
     spiceLevel: 'Medium',
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
   },
 ]
 

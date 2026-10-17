@@ -16,7 +16,7 @@ export const products = [
     pairing: ['Rice', 'Khichuri', 'Paratha'],
     stock: 24,
     image:
-      'https://images.unsplash.com/photo-1599909533730-f9d9b7f7f8e2?auto=format&fit=crop&w=900&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1599909533730-f9d9b7f7f8e2?auto=format&fit=crop&w=900&q=85',
       'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85',
@@ -46,7 +46,7 @@ export const products = [
     pairing: ['Rice', 'Dal', 'Khichuri'],
     stock: 18,
     image:
-      'https://images.unsplash.com/photo-1583663848850-46af132dc08d?auto=format&fit=crop&w=900&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1583663848850-46af132dc08d?auto=format&fit=crop&w=900&q=85',
       'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85',
@@ -76,7 +76,7 @@ export const products = [
     pairing: ['Rice', 'Khichuri', 'Pulao'],
     stock: 13,
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85',
       'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85',
@@ -106,7 +106,7 @@ export const products = [
     pairing: ['Paratha', 'Pulao', 'Snacks'],
     stock: 21,
     image:
-      'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85',
       'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85',
@@ -136,7 +136,7 @@ export const products = [
     pairing: ['Rice', 'Dal', 'Khichuri'],
     stock: 9,
     image:
-      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85',
       'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85',
@@ -166,7 +166,7 @@ export const products = [
     pairing: ['Rice', 'Noodles', 'Snacks'],
     stock: 0,
     image:
-      'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85',
+      'https://i.ibb.co.com/1Gmcf55d/Gemini-Generated-Image-jhx8ukjhx8ukjhx8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85',
       'https://images.unsplash.com/photo-1583663848850-46af132dc08d?auto=format&fit=crop&w=900&q=85',

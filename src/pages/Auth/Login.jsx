@@ -1,74 +1,139 @@
-import { Globe } from "lucide-react";
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button, ErrorMessage } from "../../components/common";
-import { FormField, PasswordField } from "../../components/forms";
-import { useAuth } from "../../context/AuthContext";
-import { getFirebaseErrorMessage } from "../../utils/getFirebaseErrorMessage";
-import AuthPageLayout from "./AuthPageLayout";
+import {  Globe } from 'lucide-react'
+import { useState } from 'react'
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
+import {
+  Button,
+  ErrorMessage,
+} from '../../components/common'
+import {
+  FormField,
+  PasswordField,
+} from '../../components/forms'
+import { useAuth } from '../../context/AuthContext'
+import { getFirebaseErrorMessage } from '../../utils/getFirebaseErrorMessage'
+import {
+  getAuthenticatedUserRole,
+  getDashboardPathForRole,
+} from '../../utils/userRole'
+import AuthPageLayout from './AuthPageLayout'
 
 function Login() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { loginWithEmail, loginWithGoogle } = useAuth();
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const {
+    loginWithEmail,
+    loginWithGoogle,
+  } = useAuth()
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+    email: '',
+    password: '',
+  })
 
-  const redirectPath = location.state?.from?.pathname || "/dashboard";
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const requestedPath =
+    location.state?.from?.pathname
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
 
     setFormData((current) => ({
       ...current,
       [name]: value,
-    }));
+    }))
 
-    setError("");
-  };
+    setError('')
+  }
+
+  const redirectUserByRole = async (user) => {
+    const role =
+      await getAuthenticatedUserRole(user)
+
+    const defaultPath =
+      getDashboardPathForRole(role)
+
+    /*
+     * Preserve a protected destination only when it
+     * matches the user's role.
+     */
+    if (
+      role === 'admin' &&
+      requestedPath?.startsWith('/admin')
+    ) {
+      navigate(requestedPath, {
+        replace: true,
+      })
+
+      return
+    }
+
+    if (
+      role === 'user' &&
+      requestedPath?.startsWith('/dashboard')
+    ) {
+      navigate(requestedPath, {
+        replace: true,
+      })
+
+      return
+    }
+
+    navigate(defaultPath, {
+      replace: true,
+    })
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError("");
-    setIsSubmitting(true);
+    event.preventDefault()
+    setError('')
+    setIsSubmitting(true)
 
     try {
-      await loginWithEmail(formData.email, formData.password);
+      const user = await loginWithEmail(
+        formData.email,
+        formData.password,
+      )
 
-      navigate(redirectPath, { replace: true });
+      await redirectUserByRole(user)
     } catch (authError) {
-      setError(getFirebaseErrorMessage(authError));
+      setError(getFirebaseErrorMessage(authError))
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleGoogleLogin = async () => {
-    setError("");
-    setIsSubmitting(true);
+    setError('')
+    setIsSubmitting(true)
 
     try {
-      await loginWithGoogle();
-      navigate(redirectPath, { replace: true });
+      const user = await loginWithGoogle()
+
+      await redirectUserByRole(user)
     } catch (authError) {
-      setError(getFirebaseErrorMessage(authError));
+      setError(getFirebaseErrorMessage(authError))
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <AuthPageLayout
       eyebrow="Welcome Back"
       title="Login to AcharBari"
-      description="Sign in to manage your orders, wishlist, and saved information."
+      description="Sign in to manage your account, orders, and saved flavors."
     >
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-5"
+      >
         <ErrorMessage message={error} />
 
         <FormField
@@ -110,7 +175,9 @@ function Login() {
           Login
         </Button>
 
-        <div className="divider text-xs text-brand-muted">OR</div>
+        <div className="divider text-xs text-brand-muted">
+          OR
+        </div>
 
         <Button
           type="button"
@@ -125,7 +192,7 @@ function Login() {
       </form>
 
       <p className="mt-6 text-center text-sm text-brand-muted">
-        Do not have an account?{" "}
+        Do not have an account?{' '}
         <Link
           to="/register"
           className="font-semibold text-brand-primary hover:text-brand-secondary"
@@ -134,7 +201,7 @@ function Login() {
         </Link>
       </p>
     </AuthPageLayout>
-  );
+  )
 }
 
-export default Login;
+export default Login

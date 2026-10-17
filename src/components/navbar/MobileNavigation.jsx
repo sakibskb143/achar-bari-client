@@ -1,5 +1,6 @@
 import { X } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { USER_ROLES } from '../../utils/userRole'
 
 const navigationLinks = [
   {
@@ -28,21 +29,28 @@ function MobileNavigation({
   isOpen,
   onClose,
   currentUser,
+  userRole,
   onLogout,
 }) {
   if (!isOpen) {
     return null
   }
 
-  const visibleLinks = currentUser
-    ? [
-        ...navigationLinks,
-        {
-          label: 'Dashboard',
-          path: '/dashboard',
-        },
-      ]
-    : navigationLinks
+  const visibleLinks = [...navigationLinks]
+
+  if (currentUser && userRole === USER_ROLES.USER) {
+    visibleLinks.push({
+      label: 'Dashboard',
+      path: '/dashboard',
+    })
+  }
+
+  if (currentUser && userRole === USER_ROLES.ADMIN) {
+    visibleLinks.push({
+      label: 'Admin Panel',
+      path: '/admin',
+    })
+  }
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
