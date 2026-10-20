@@ -1,4 +1,4 @@
-# 🥭 Achar Bazar — Traditional Bengali Pickle Store
+# 🥭 Achar Bari — Traditional Bengali Pickle Store
 
 Achar Bazar is a modern e-commerce frontend designed for discovering and purchasing traditional Bengali pickles. It provides a user-friendly shopping experience with product browsing, taste-based discovery, customizable achar boxes, cart management, checkout, Firebase authentication, and separate customer and admin dashboards.
 
